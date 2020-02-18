@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class ApplicationToPersonMigration extends Migration
+class AddressToCompanyMigration extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,18 @@ class ApplicationToPersonMigration extends Migration
      */
     public function up()
     {
-        $tableName = 'applicationToPerson';
+        $tableName = 'addressToCompany';
         Schema::dropIfExists($tableName);
         Schema::create($tableName, function (Blueprint $table) {
-            $table->unsignedBigInteger('applicationId');
-            $table->unsignedBigInteger('personId');
+            $table->unsignedBigInteger('addressId');
+            $table->unsignedBigInteger('companyId');
             $table->string('comment');
             $table->timestamps();
             $table->softDeletes();
-            $table->foreign('applicationId')->references('id')->on('applications');
-            $table->foreign('personId')->references('id')->on('persones');
-        });
-
+            $table->foreign('addressId')->references('id')->on('addresses');
+            $table->foreign('companyId')->references('id')->on('companies');
+              $table->bigIncrements('id')->unsigned();
+         });
     }
 
     /**

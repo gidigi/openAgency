@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class ApplicationToPersonMigration extends Migration
+class PhoneToAgencyMigration extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,14 @@ class ApplicationToPersonMigration extends Migration
      */
     public function up()
     {
-        $tableName = 'applicationToPerson';
+        $tableName = 'phoneToAgency';
         Schema::dropIfExists($tableName);
         Schema::create($tableName, function (Blueprint $table) {
-            $table->unsignedBigInteger('applicationId');
-            $table->unsignedBigInteger('personId');
-            $table->string('comment');
-            $table->timestamps();
-            $table->softDeletes();
-            $table->foreign('applicationId')->references('id')->on('applications');
-            $table->foreign('personId')->references('id')->on('persones');
+            $table->unsignedBigInteger('phoneId');
+            $table->unsignedBigInteger('agencyId');
+            $table->foreign('phoneId')->references('id')->on('phones');
+            $table->foreign('agencyId')->references('id')->on('agencies');
         });
-
     }
 
     /**
